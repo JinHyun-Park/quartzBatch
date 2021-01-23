@@ -1,4 +1,4 @@
-package com.skcc.narubatch.sampleJob;
+package com.skcc.narubatch.sampleJob2;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +10,7 @@ import org.quartz.JobExecutionException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SampleJob implements Job {
+public class SampleJob2 implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		
@@ -20,7 +20,7 @@ public class SampleJob implements Job {
 		String currentDate = sdf1.format(date);
 		String currentTime = sdf2.format(date);
 		
-		log.info("===========SampleJob execute() method Start !! ===========");
+		log.info("===========SampleJob222222222 execute() method Start !! ===========");
 		log.info("Start time >>> {}", currentDate + " " + currentTime);
 	}
 }

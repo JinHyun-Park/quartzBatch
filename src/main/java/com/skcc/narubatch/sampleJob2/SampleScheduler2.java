@@ -1,4 +1,4 @@
-package com.skcc.narubatch.sampleJob;
+package com.skcc.narubatch.sampleJob2;
 
 import javax.annotation.PostConstruct;
 
@@ -14,7 +14,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SampleScheduler {
+public class SampleScheduler2 {
 	private SchedulerFactory schedulerFactory;
 	private Scheduler scheduler;
 	
@@ -24,8 +24,8 @@ public class SampleScheduler {
 		scheduler = schedulerFactory.getScheduler();
 		scheduler.start();
 		
-		JobDetail job = JobBuilder.newJob(SampleJob.class).withIdentity("sampleJob").build();
-		Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("*/10 * * * * ?")).build();
+		JobDetail job = JobBuilder.newJob(SampleJob2.class).withIdentity("sampleJob2").build();
+		Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("*/7 * * * * ?")).build();
 		
 		scheduler.scheduleJob(job, trigger);
 	}

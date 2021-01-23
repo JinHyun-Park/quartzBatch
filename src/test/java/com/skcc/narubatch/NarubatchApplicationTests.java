@@ -1,4 +1,4 @@
-package com.example.narubatch;
+package com.skcc.narubatch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

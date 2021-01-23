@@ -1,1 +1,7 @@
-
+quartz:
+  scheduler-name: QuartzScheduler
+  properties:
+    org:
+      quartz:
+        threadPool:
+          threadCount: 5
