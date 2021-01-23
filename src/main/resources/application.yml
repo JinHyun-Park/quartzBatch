@@ -1,7 +1,64 @@
-quartz:
-  scheduler-name: QuartzScheduler
-  properties:
-    org:
-      quartz:
-        threadPool:
-          threadCount: 5
+spring:
+  profiles.active: dev
+       
+#mybatis:
+#  type-aliases-package: com.skcc.naruback.mapper
+#  mapper-locations: mybatis/mapper/**/*.xml
+#  config-location: classpath:/mybatis/mybatis-config.xml
+       
+---
+
+spring:
+  profiles: dev 
+  application:
+    name: SpringBootJdbc
+  datasource: 
+    url: jdbc:mariadb://34.64.198.41:3306/metaportal?characterEncoding=UTF-8&autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: skccmis!
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari: 
+      pool-name: hikari-cp
+      maximum-pool-size: 30
+      minimum-idle: 2
+      data-source-properties: 
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+          prepStmtCacheSqlLimit: 2048
+          useServerPrepStmts: true
+
+#logging:
+#  config: classpath:logback-spring-debug.xml
+
+server:
+  port: 3000
+  servlet.session.timeout: 5400
+ 
+  
+  
+---
+
+spring:
+  profiles: production 
+  application:
+    name: SpringBootJdbc
+  datasource: 
+    url: jdbc:mysql://localhost:3316/metaportal
+    username: metaportal
+    password: skccmis!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari: 
+      pool-name: hikari-cp
+      maximum-pool-size: 30
+      minimum-idle: 2
+      data-source-properties: 
+          cachePrepStmts: true
+          prepStmtCacheSize: 250
+          prepStmtCacheSqlLimit: 2048
+          useServerPrepStmts: true
+
+#logging:
+#  config: classpath:logback-spring-debug.xml
+
+server:
+  port: 3000 
