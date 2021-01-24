@@ -12,6 +12,7 @@ spring:
   profiles: dev 
   application:
     name: SpringBootJdbc
+#  batch.job.enabled: false
   datasource: 
     url: jdbc:mariadb://34.64.198.41:3306/metaportal?characterEncoding=UTF-8&autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul
     username: root
@@ -26,6 +27,21 @@ spring:
           prepStmtCacheSize: 250
           prepStmtCacheSqlLimit: 2048
           useServerPrepStmts: true
+#  quartz:
+##    jobStore:
+##      isClustered: true#    properties:
+#      org:
+#        quartz:
+#          threadPool:
+#            threadCount: 3
+#          plugin:
+#            shutdownhook:
+#              class: org.quartz.plugins.management.ShutdownHookPlugin
+#              cleanShutdown: true
+#          jobStore:
+#            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+#            isClustered: true
 
 #logging:
 #  config: classpath:logback-spring-debug.xml
@@ -42,6 +58,7 @@ spring:
   profiles: production 
   application:
     name: SpringBootJdbc
+#  batch.job.enabled: false
   datasource: 
     url: jdbc:mysql://localhost:3316/metaportal
     username: metaportal

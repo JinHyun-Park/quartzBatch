@@ -6,10 +6,12 @@ import java.util.Date;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class SampleJob2 implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -20,7 +22,7 @@ public class SampleJob2 implements Job {
 		String currentDate = sdf1.format(date);
 		String currentTime = sdf2.format(date);
 		
-		log.info("===========SampleJob222222222 execute() method Start !! ===========");
+		log.info("===========22222222222222 execute() method Start !! ===========");
 		log.info("Start time >>> {}", currentDate + " " + currentTime);
 	}
 }
