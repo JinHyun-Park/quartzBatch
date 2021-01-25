@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skcc.narubatch.mapper.eigwdb.EigwMonitoringMapper">
+	
+	<select id="selectEigwOnlineError" resultType="map">
+		SELECT USER_ID, 
+			   DATE_FORMAT(IF_RGST_DTM, '%Y%m%d%H%i%s') ifRgstDtm
+		  FROM CC_CHRGR_INFO
+		 WHERE USER_ID = #{sktEmpNum}
+	</select>
+</mapper>

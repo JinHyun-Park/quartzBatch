@@ -14,7 +14,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.skcc.narubatch.sampleJob.SampleJob;
+import com.skcc.narubatch.eigwMonitoringJob.EigwMonitoringJob;
 import com.skcc.narubatch.sampleJob2.SampleJob2;
 
 @Component
@@ -31,7 +31,7 @@ public class SampleScheduler {
 		scheduler = schedulerFactory.getScheduler();
 		scheduler.start();
 		
-		JobDetail job = JobBuilder.newJob(SampleJob.class).withIdentity("sampleJob").build();
+		JobDetail job = JobBuilder.newJob(EigwMonitoringJob.class).withIdentity("eigwMon").build();
 		Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule("*/5 * * * * ?")).build();
 		
 		JobDetail job2 = JobBuilder.newJob(SampleJob2.class).withIdentity("sampleJob2").build();
