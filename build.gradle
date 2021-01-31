@@ -1,9 +1,10 @@
 plugins {
 	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'		// 지우기
 	id 'java'
 }
 
-group = 'com.example'
+group = 'com.skcc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -14,8 +15,20 @@ configurations {
 }
 
 repositories {
-	maven {
-        url "http://devops.sktelecom.com/myrepo/content/groups/public"
+	//maven {
+    //    url "http://devops.sktelecom.com/myrepo/content/groups/public"
+    //}
+    mavenCentral()
+    
+    //아래 지우기
+    jcenter()
+    maven {
+       //url "https://www.oracle.com/content/secure/maven/content"
+       url "http://nexus.saas.hand-china.com/content/repositories/rdc/"	// 지우기
+       //credentials {
+         //username = 'jinhyun0504@hanmail.net'
+        //password = 'Qkrwlsgus1!'
+       //}
     }
 }
 
@@ -28,13 +41,17 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.6'
 	annotationProcessor 'org.projectlombok:lombok:1.18.6'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.4.1'
-	testImplementation 'org.springframework.batch:spring-batch-test:2.4.1'
+	//testImplementation 'org.springframework.batch:spring-batch-test:2.4.1'   //살리고
+	testImplementation 'org.springframework.batch:spring-batch-test'      //지우기
 	implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.0'
-	implementation 'com.oracle:ojdbc6:11.2.0.3'
+	compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.3'		//지우기
+	//implementation 'com.oracle:ojdbc6:11.2.0.3'   // 살리고
 	//runtimeOnly 'mysql:mysql-connector-java'
 	//testImplementation('org.springframework.boot:spring-boot-starter-test') {
 	//	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	//}
+	compile("org.apache.commons:commons-dbcp2:2.1.1")
+	compile("mysql:mysql-connector-java:5.1.36")
 }
 
 test {

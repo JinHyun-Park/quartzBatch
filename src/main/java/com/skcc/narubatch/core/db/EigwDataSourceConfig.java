@@ -9,10 +9,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -27,21 +26,24 @@ public class EigwDataSourceConfig {
 	}
 	
 	@Bean(name="eigwSqlSessionFactory")
-	public SqlSessionFactory eigwSqlSessionFactory(@Qualifier("eigwDataSource") DataSource mainDataSource,
-			ApplicationContext applicationContext) throws Exception {
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+	public SqlSessionFactory eigwSqlSessionFactory(@Qualifier("eigwDataSource") DataSource mainDataSource) throws Exception {
+//		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(mainDataSource);
 		//sqlSessionFactoryBean.setTypeAliasesPackage("com.skcc.naruinside.user.domain.User");
-		sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis/mybatis-config.xml"));
-		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mybatis/mapper/eigwdb/**.xml"));
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
+		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/eigwdb/**.xml"));
+		
 		return sqlSessionFactoryBean.getObject();
 		
 	}
 	
 	@Bean(name="eigwSqlSessionTemplate")
-	public SqlSessionTemplate eigwSqlSessionTemplate(@Qualifier("eigwSqlSessionFactory") SqlSessionFactory eigwSqlSessionFactory) {
-		return new SqlSessionTemplate(eigwSqlSessionFactory);
+	public SqlSessionTemplate eigwSqlSessionTemplate(@Qualifier("eigwSqlSessionFactory") SqlSessionFactory eigwSqlSessionFactory) throws Exception {
+		final SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(eigwSqlSessionFactory);
+		return sqlSessionTemplate;
 	}
-	
 
 }

@@ -13,6 +13,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
@@ -20,31 +22,41 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class NaruDataSourceConfig {
 	
-	@Primary
 	@Bean(name="naruDataSource")
+	@Primary
 	@ConfigurationProperties(prefix="spring.naru.datasource")
 	public DataSource naruDataSource() {
 		return DataSourceBuilder.create().build();
 	}
 	
-	@Primary
+
 	@Bean(name="naruSqlSessionFactory")
-	public SqlSessionFactory naruSqlSessionFactory(@Qualifier("naruDataSource") DataSource mainDataSource,
-			ApplicationContext applicationContext) throws Exception {
-		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+	@Primary
+	public SqlSessionFactory naruSqlSessionFactory(@Qualifier("naruDataSource") DataSource mainDataSource) throws Exception {
+		final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(mainDataSource);
 		//sqlSessionFactoryBean.setTypeAliasesPackage("com.skcc.naruinside.user.domain.User");
-		sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis/mybatis-config.xml"));
-		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mybatis/mapper/narudb/**.xml"));
+		
+		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
+		sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/narudb/**.xml"));
+		
 		return sqlSessionFactoryBean.getObject();
 		
 	}
 	
-	@Primary
 	@Bean(name="naruSqlSessionTemplate")
-	public SqlSessionTemplate naruSqlSessionTemplate(@Qualifier("naruSqlSessionFactory") SqlSessionFactory naruSqlSessionFactory) {
-		return new SqlSessionTemplate(naruSqlSessionFactory);
+	@Primary
+	public SqlSessionTemplate naruSqlSessionTemplate(@Qualifier("naruSqlSessionFactory") SqlSessionFactory naruSqlSessionFactory) throws Exception{
+		final SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(naruSqlSessionFactory);
+		return sqlSessionTemplate;
 	}
 	
+	@Bean(name = "naruDataSourceTransactionManager")
+	@Primary
+	public DataSourceTransactionManager transactionManager (@Qualifier("naruDataSource") DataSource dataSource) {
+		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+		return transactionManager;
+	}
 
 }

@@ -8,28 +8,37 @@ spring:
        
 ---
 spring:
-  profiles: dev 
+  config.activate.on-profile: dev
+  #profiles: dev
   naru:
     datasource:
-      jdbc-url: jdbc:mariadb://150.206.10.180:3306/narud?characterEncoding=UTF-8&autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul
-      username: naru
+      #jdbc-url: jdbc:mariadb://150.206.10.180:3306/narud?characterEncoding=UTF-8&autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul
+      #username: naru
+      #password: skccmis!
+      jdbc-url: jdbc:mariadb://34.64.198.41:3306/metaportal?characterEncoding=UTF-8&autoReconnect=true&useUnicode=true&serverTimezone=Asia/Seoul
+      username: root
       password: skccmis!
-      driver-class-name: org.mariadb.jdbc.Driver    
-           
+      driver-class-name: org.mariadb.jdbc.Driver
+      validationQuery: select 1
   eigw:
     datasource:
-      jdbc-url: jdbc:oracle:thin:@150.2.225.54:1507:EGWP2
-      username: egw
-      password: eigw_2016
+     # jdbc-url: jdbc:oracle:thin:@150.2.225.54:1507:EGWP2
+      #username: egw
+      #password: eigw_2016
+      jdbc-ur: jdbc:oracle:thin://34.64.198.41:1507:EGWP2
+      username: root
+      password: skccmis!
       driver-class-name: oracle.jdbc.driver.OracleDriver
+      validationQuery: select 1
       
-#  quartz:
-##    jobStore:
-##      isClustered: true#    properties:
-#      org:
-#        quartz:
-#          threadPool:
-#            threadCount: 3
+  quartz:
+#    jobStore:
+#      isClustered: true
+    properties:
+      org:
+        quartz:
+          threadPool:
+            threadCount: 3
 #          plugin:
 #            shutdownhook:
 #              class: org.quartz.plugins.management.ShutdownHookPlugin
@@ -51,7 +60,8 @@ server:
 ---
 
 spring:
-  profiles: production 
+  config.activate.on-profile: production
+  #profiles: production 
   application:
     name: SpringBootJdbc
 #  batch.job.enabled: false

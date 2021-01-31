@@ -1,4 +1,4 @@
-pluginManagement {
+/*pluginManagement {
 	plugins {
 		id 'org.springframework.boot' version '2.4.1'
 	}
@@ -7,5 +7,5 @@ pluginManagement {
             url 'http://devops.sktelecom.com/myrepo/content/groups/public'
         }
     }
-}
+}*/
 rootProject.name = 'narubatch'

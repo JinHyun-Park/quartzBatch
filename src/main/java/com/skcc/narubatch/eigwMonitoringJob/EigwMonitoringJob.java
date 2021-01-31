@@ -26,10 +26,9 @@ public class EigwMonitoringJob implements Job {
 	@Autowired
 	NaruMonitoringMapper naruMonitoringMapper;
 	
-	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		
+		log.info("eigwList count : [{}] eigweigweigweigweigweigw");
 		Date date = new Date();
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy년 MM월 dd일");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH시 mm분 ss초");
@@ -37,10 +36,14 @@ public class EigwMonitoringJob implements Job {
 		String currentTime = sdf2.format(date);
 		
 		log.info("===========EigwMonitoringJob execute() method Start !! ===========");
-		log.info("Start time >>> {}", currentDate + " " + currentTime);
+		log.info("eigw time >>> {}", currentDate + " " + currentTime);
 		
-		List<Map<String, Object>> eigwList = eigwMonitoringMapper.selectEigwOnlineError();
-		log.debug("eigwList count : [{}]", eigwList.size());
+		try {
+			List<Map<String, Object>> eigwList = eigwMonitoringMapper.selectEigwOnlineError();
+			log.info("eigwList count : [{}]", eigwList.size());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		
 //		for(Map<String, Object> eigw : eigwList) {
 //			naruMonitoringMapper.insertEigwMonOnlineError(eigw);
