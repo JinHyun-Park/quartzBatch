@@ -93,30 +93,30 @@
 ////
 ////	    return quartzScheduler;
 ////	}
-//	 public final class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory{
-//
-//		    private AutowireCapableBeanFactory beanFactory;
-//
-//		    public AutowiringSpringBeanJobFactory(final ApplicationContext applicationContext){
-//		        beanFactory = applicationContext.getAutowireCapableBeanFactory();
-//		    }
-//
-//		    protected Object createJobInstance(final TriggerFiredBundle bundle) throws Exception {
-//		        final Object job = super.createJobInstance(bundle);
-//		        beanFactory.autowireBean(job);
-//		        beanFactory.initializeBean(job, job.getClass().getName());
-//		        return job;
-//		    }
-//		}
-//
-//
-//		@Configuration
-//		public class SchedulerConfig {   
-//		    @Autowired private ApplicationContext applicationContext;
-//
-//		    @Bean
-//		    public AutowiringSpringBeanJobFactory getAutowiringSpringBeanJobFactory(){
-//		        return new AutowiringSpringBeanJobFactory(applicationContext);
-//		    }
-//		}
+////	 public final class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory{
+////
+////		    private AutowireCapableBeanFactory beanFactory;
+////
+////		    public AutowiringSpringBeanJobFactory(final ApplicationContext applicationContext){
+////		        beanFactory = applicationContext.getAutowireCapableBeanFactory();
+////		    }
+////
+////		    protected Object createJobInstance(final TriggerFiredBundle bundle) throws Exception {
+////		        final Object job = super.createJobInstance(bundle);
+////		        beanFactory.autowireBean(job);
+////		        beanFactory.initializeBean(job, job.getClass().getName());
+////		        return job;
+////		    }
+////		}
+////
+////
+////		@Configuration
+////		public class SchedulerConfig {   
+////		    @Autowired private ApplicationContext applicationContext;
+////
+////		    @Bean
+////		    public AutowiringSpringBeanJobFactory getAutowiringSpringBeanJobFactory(){
+////		        return new AutowiringSpringBeanJobFactory(applicationContext);
+////		    }
+////		}
 //}
