@@ -25,7 +25,7 @@ spring:
      # jdbc-url: jdbc:oracle:thin:@150.2.225.54:1507:EGWP2
       #username: egw
       #password: eigw_2016
-      jdbc-ur: jdbc:oracle:thin://34.64.198.41:1507:EGWP2
+      jdbc-url: jdbc:oracle:thin://34.64.198.41:1507:EGWP2
       username: root
       password: skccmis!
       driver-class-name: oracle.jdbc.driver.OracleDriver
